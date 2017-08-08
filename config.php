@@ -14,7 +14,8 @@
 * successively applying connection parameters from the array in
 * $c->pg_connect.
 */
-$c->pg_connect[] = getenv('DAVICAL_PG_CONNECT');
+$c->pg_connect[] = "dbname=".getenv('DAVICAL_ADMIN_DB_NAME')." user=".getenv('DAVICAL_APP_DB_USER')." password=".getenv('DAVICAL_APP_DB_PASS')." port=".getenv('DAVICAL_ADMIN_DB_PORT')." host=".getenv('DAVICAL_ADMIN_DB_HOST');
+//$c->pg_connect[] = "dbname=".getenv('DAVICAL_ADMIN_DB_NAME')." user=".getenv('DAVICAL_ADMIN_DB_USER')." port=".getenv('DAVICAL_ADMIN_DB_PORT')." host=".getenv('DAVICAL_ADMIN_DB_HOST')." password=".getenv('DAVICAL_ADMIN_DB_PASS');
 //"dbname=davical user=davical_app";
 //$c->pg_connect[] = "dbname=davical user=davical_app";
 // $c->pg_connect[] = "dbname=davical user=davical_app port=5433 host=somehost password=mypass";
@@ -308,7 +309,7 @@ $c->admin_email ='calendar-admin@example.com';
 * clients to send out and receive scheduling requests.
 * Default: true
 */
-// $c->enable_auto_schedule = false;
+$c->enable_auto_schedule = getenv('DAVICAL_ENABLE_AUTO_SCHEDULE');
 
 /**
 * If true, then remote scheduling will be enabled.  There is a possibility

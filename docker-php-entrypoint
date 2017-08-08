@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+# write /etc/davical/administration.yml
+echo "admin_db_user: ${DAVICAL_ADMIN_DB_USER}
+admin_db_pass: ${DAVICAL_ADMIN_DB_PASS}
+admin_db_host: ${DAVICAL_ADMIN_DB_HOST}
+admin_db_name: ${DAVICAL_ADMIN_DB_NAME}
+admin_db_port: ${DAVICAL_ADMIN_DB_PORT}
+app_db_user: ${DAVICAL_APP_DB_USER}" > /etc/davical/administration.yml
+
+
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+    set -- php "$@"
+fi
+
+exec "$@"
